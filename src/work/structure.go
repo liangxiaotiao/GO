@@ -17,7 +17,11 @@ func main() {
 	//season(8)
 	//lxtFoWork1()
 	//lxtFoWork2()
-	lxtSwitchWork3()
+	//lxtSwitchWork3()
+	//lxtForRange()
+	//lxtForWork()
+	//lxtBreakAndContinue()
+	lxtGotolevel()
 }
 
 //记录 %d是format整数中添加
@@ -218,5 +222,90 @@ func lxtSwitchWork3() {
 			fmt.Print("*")
 		}
 		fmt.Println()
+	}
+}
+
+func lxtForRange() {
+	str := "Go is a beautiful language!"
+	fmt.Printf("The length of str is: %d\n", len(str))
+	for pos, char := range str {
+		fmt.Printf("Character on position %d is: %c \n", pos, char)
+	}
+	fmt.Println()
+	str2 := "Chinese: 日本語"
+	fmt.Printf("The length of str2 is: %d\n", len(str2))
+	for pos, char := range str2 {
+		fmt.Printf("character %c starts at byte position %d\n", char, pos)
+	}
+	fmt.Println()
+	fmt.Println("index int(rune) rune    char bytes")
+	for index, rune := range str2 {
+		fmt.Printf("%-2d      %d      %U '%c' % X\n", index, rune, rune, rune, []byte(string(rune)))
+	}
+}
+
+func lxtForWork() {
+	//应该是循环打印5个0 v在循环中赋值为5后重新进入循环体，又被重新初始化了
+	//for i := 0; i < 5; i++ {
+	//	var v int
+	//	fmt.Printf("%d ", v)
+	//	v = 5
+	//}
+	//应该是个无限循环，因为这段代码没有条件，所以无限循环
+	//for i := 0; ; i++ {
+	//	fmt.Println("Value of i is now:", i)
+	//}
+	//（打印一个0 因为他没有修饰语句，所以成立一次后结束）
+	// 結論错误!!!经过运行，得出因为没有修饰语句，此段代码每次都成立i<3，所以为无限循环
+	//for i := 0; i < 3;{
+	//	fmt.Printf("\nValue of i: %d", i)
+	//}
+	//应该是循环五次,因为在循环尾部s = s + "a"这句代码相当于为上面的变量赋值,累加五次后与条件成立退出循环
+	s := ""
+	for ; s != "aaaaa"; {
+		fmt.Println("Value of s:", s)
+		s = s + "a"
+	}
+
+	//循环3次,等到i不满足<3的条件时 退出循环
+	for i, j, s := 0, 5, "a"; i < 3 && j < 100 && s != "aaaaa"; i, j, s = i+1, j+1, s+"a" {
+		fmt.Println("Value of i, j, s:", i, j, s)
+	}
+}
+
+//break\continue的使用
+func lxtBreakAndContinue() {
+	//关键字 continue 忽略剩余的循环体而直接进入下一次循环的过程，但不是无条件执行下一次循环，执行之前依旧需要满足循环的判断条件。
+	for i := 1; i < 10; i++ {
+		if i == 5 {
+			continue
+		}
+		print(" ", i)
+	}
+	//因此每次迭代都会对条件进行检查（i < 0），以此判断是否需要停止 循环。如果退出条件满足，则使用 break 语句退出循环。
+	//一个 break 的作用范围为该语句出现后的最内部的结构，它可以被用于任何形式的 for 循环（计数器、条件判断等）。
+	// 但在 switch 或 select 语句中（详见第 13 章），break 语句的作用结果是跳过整个代码块，执行后续的代码。
+	//	下面的示例中包含了嵌套的循环体（for4.go），break 只会退出最内层的循环：
+	for i := 1; i < 10; i++ {
+		if i == 5 {
+			break
+		}
+		println()
+		print(" ", i)
+	}
+}
+
+//label和goto的使用
+func lxtGotolevel() {
+	//for、switch 或 select 语句都可以配合标签（label）形式的标识符使用，即某一行第一个以冒号（:）结尾的单词（gofmt 会将后续代码自动移至下一行）。
+
+LABEL1:
+	for i := 0; i <= 5; i++ {
+		for j := 0; j <= 5; j++ {
+			if j == 4 {
+				continue LABEL1
+			}
+			fmt.Printf("i is: %d, and j is: %d\n", i, j)
+		}
 	}
 }
