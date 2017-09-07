@@ -20,10 +20,18 @@ func main() {
 	//a, b, c := lxtFuncReturn1(20, 10)
 	//fmt.Println("和:", a, " 积:", b, " 差:", c)
 	//MySqrt()
-	n:=0
-	reply := &n
-	Multiply(10,5,reply)
-	fmt.Println("Multiply",*reply)
+	//n := 0
+	//reply := &n
+	//Multiply(10, 5, reply)
+	//fmt.Println("Multiply", *reply)
+
+	//num := Parameter(1, 2, 3, 4)
+	//fmt.Println("NUMBER :", num)
+	//arr := []int{5, 6, 7, 8, 9}
+	//number := Parameter(arr...)
+	//fmt.Println("ARR :", number)
+
+	F1("A","B","C","D","E")
 }
 
 //编写一个函数，接收两个整数，然后返回它们的和、积与差。编写两个版本，一个是非命名返回值，一个是命名返回值。
@@ -62,10 +70,34 @@ func Mysqrt2(f float64) (ret float64, err error) {
 	}
 	return
 }
+
 // this function changes reply:
 func Multiply(a, b int, reply *int) {
 	*reply = a * b
 }
 
+func Parameter(a ...int) int {
+	if len(a) == 0 {
+		return 0
+	}
+	min := a[0]
+	for _, v := range a {
+		if v < min {
+			min = v
+		}
+	}
+	return min
+}
 
+func F1(s ...string)  {
+	F2(s...)
+	F3(s)
+}
 
+func F2(s ... string)  {
+	fmt.Println("F2---",s)
+
+}
+func F3(s []string)  {
+	fmt.Println("F3---",s)
+}
