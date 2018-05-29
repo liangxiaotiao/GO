@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"myfunc"
+	"gohome/myfunc"
 )
 
 func main() {
