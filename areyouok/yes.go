@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func imfinl() {
 	fmt.Println("爱你哦")
 	fmt.Println("")
 	a, b := 4, 5
